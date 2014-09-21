@@ -22,7 +22,7 @@
 
 	<!-- Cimply JS -->
 	<script src='/cimply_helper.js'></script>
-	<script src='/cimply.js'></script>
+
 
 </head>
 </head>
@@ -32,7 +32,7 @@
 		width:50%;
 	}
 	</style>
-
+	<h1>Get Funding.</h1>
 	Add a New Cause:<br/>
 	Skeleton for now. bare bones is generous. <br/>
 	<input type="text" id='corp' placeholder='Corporation'></input><br/>
@@ -40,7 +40,7 @@
 	<input type="text" id='URL' placeholder='The URL of where the organization"s photo can be found'></input><br/>
 	<input type="text" id='display_name' placeholder='Display Name (can be multiple words; what the user sees)'></input><br/>
 	<input type="text" id='description' height:300 placeholder='description of the cause'></input><br/>
-	<button id='add_new_cause_btn'>Add This Cause</button>
+	<button id='add_new_cause_btn' onclick='add_new_cause()'>Add This Cause</button>
 	<div id="msg"></div>
 
 </body>

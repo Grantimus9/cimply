@@ -28,7 +28,11 @@ $(document).ready(function(){
 			})
 
 	    //Run main routine
-		show_cause();
+	    var mode = 'swipe';
+	    if (mode == 'swipe') {
+	    	show_cause();
+	    }
+		
 
 	  } else {
 	    // user is logged out
@@ -55,41 +59,6 @@ $(document).ready(function(){
 		}
 	);
 
-
-	// Droppable zones 
-
-	//make elements draggable/droppable. This might be more overhead than necessary. 
-	$(function() {
-		$(document).on('load', '.cause_card', function() {
-			$(".cause_card").draggable({ revert:true, revertDuration:0 });
-			}
-		);
-	})
-	
-	$(function() {
-		$("#donate_zone").droppable({
-			drop: function(event, ui) {
-				// do something on dropped on this area
-				}
-		});
-		$("#no_zone").droppable({
-			drop: function(event, ui) {
-				// do something on dropped on this area
-				}
-		});
-		$("#top_zone").droppable({
-			drop: function(event, ui) {
-				// do something on dropped on this area
-				}
-		});
-		$("#bottom_zone").droppable({
-			drop: function(event, ui) {
-				// do something on dropped on this area
-				}
-		});
-	})
-
-
 	//Adding a New Cause Page functions 
 	$(document).on('click', '#add_new_cause_btn', function() {
 			add_new_cause();
@@ -99,11 +68,66 @@ $(document).ready(function(){
 }) //end of docready. 
 
 
-
-
 function show_cause() {
-	// This is the main routine, the backbone logic flow. 
-	var current_cause = get_cause();
+	// This is the main routine, the backbone logic flow.
+
+	//first make sure all of the draggable/droppable elements are initialized. 
+	$(".cause_card").draggable({ revert:true, revertDuration:0, stack:"div"});
+	
+	$("#donate_zone").droppable({
+		drop: function(event, ui) {
+			// do something on dropped on this area
+			console.log('dropped on donate.')
+
+			},
+		tolerance: "touch"
+	});
+	$("#no_zone").droppable({
+		drop: function(event, ui) {
+			// do something on dropped on this area
+			console.log('dropped on no zone.')
+			
+			},
+		tolerance: "touch"
+	});
+	$("#top_zone").droppable({
+		drop: function(event, ui) {
+			// do something on dropped on this area
+			console.log('dropped on top zone.')
+			},
+		tolerance: "touch"
+	});
+	$("#bottom_zone").droppable({
+		drop: function(event, ui) {
+			// do something on dropped on this area
+			console.log('dropped on bottom zone.')
+			},
+		tolerance: "touch"
+	});
+
+
+	var currentcauseRef = new Firebase('https://cimply.firebaseio.com/'+window.corp+'/user/'+window.user.id+'/cause_index_location');
+	currentcauseRef.once('value', function(snap){
+		var loc = snap.val();
+		var causenameref = new Firebase('https://cimply.firebaseio.com/'+window.corp+'/causes/corps_causes_index');
+		causenameref.once('value', function(namesnap){
+			console.info( namesnap.val() );
+			if (namesnap) {
+				var causename = namesnap.val();
+				console.log('on cause named: '+causename);
+
+				var causeref = new Firebase('https://cimply.firebaseio.com/causes/'+causename);
+				causeref.once('value', function(causerefsnap){
+					render_cause_card( causerefsnap.val() );
+				})
+			} else {
+				console.log('no name corresponding to that index.');
+			}
+		})
+	})
+
+
+
 
 }
 

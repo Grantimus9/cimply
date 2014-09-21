@@ -32,18 +32,17 @@ function createNewUser(email, password) {
 		
 		//set the uid-corp index (denormalized data is weird) so we can look up the user's corporation later. 
 		// for now the corp is Lockheed
-	    var corp = 'Lockheed';
+	    var corp = 'GS';
 	    cimplyRef.child('user_corp_index/'+user.id).set(corp);
 
 	    //Create a random start location for the user
 	    //TO DO 
 	    // 
 
-
 	    //create a user reference under the corporation's list of users.
 	    cimplyRef.child(corp+'/user/'+user.id).update({ 
 	    	'id' :user.id,
-	    	'cause_index_locaton': 0,
+	    	'cause_index_locaton': 1,
 	    })
 
 	    LoginUser(email, password);
@@ -91,80 +90,54 @@ function removeUser(email, password) {
 // 
 // 
 
-function get_cause() {
-	//cause_index under each corp. holds each cause the corp supports indexed so given a random number you can get the cause name. 
-
-	var corp_causes = new Firebase("https://cimply.firebaseio.com/"+window.corp+"/causes");
-	corp_causes.on('value', function(snap) {
-		var total = snap.numChildren();
-	})
-
-
-
-
+function render_cause_card(snap) {
+	console.log('snap to be rendered');
+	console.info( snap );
 }
 
 
-
 function add_new_cause() {
-	if (slug) {
 		//sanitize these b/c they're used in URLs/locations later. 
-		var slug = fb_san($('#name').val());
-		var corp = fb_san($('#corp').val());
+		var slug = fb_san( $('#name').val() );
+		var corp = fb_san( $('#corp').val() );
+		console.log('slug: '+slug);
 
 		var URL = $('#URL').val(); //not stored as a firebase location URL
 		var display_name = $('#display_name').val();
 		var description = $('#description').val();
 
-		// console.log(slug, URL, display_name, corp, description);
+		//add it to the corporation's list of causes. 
+		var corpRef = new Firebase("https://cimply.firebaseio.com/"+corp+"/causes/"+slug);
+		corpRef.update({
+			'dollars':0,
+		})
 
 		var onComplete = function(error) {
 		  if (error) {
 		    console.log('Synchronization failed');
 		  } else {
-		    $('#msg').html("SUCCESS!");
+		    console.log('Synchronization succeeded');
+		    $('#msg').html('SUCCESS!');
 		    $('input').val('');
 		  }
 		};
 
-		//add it to the corporation's list of causes. 
-		var corpRef = new Firebase("https://cimply.firebaseio.com/"+corp+"/causes/"+slug);
-		console.info(corpRef);
-		corpRef.update({
-			'dollars':0,
-		})
-
 		//update the corporations corpindex (translates numbers to corp slugs) 
-		var causesindexRef = new Firebase("https://cimply.firebaseio.com/"+corp+"/causes/corps_causes_index");
-		console.info(corpRef);
-		causesindexRef.on('value', function(snap) {
-			if (snap) {
-				var total = snap.numChildren()+1;
-				causesindexRef.set({
-					total : corp,
-				})
-			} else { 
-				//it's the first time/blank
-				causesindexRef.set({
-					total : 0,
-				})
-			}
+		var causesindexRef = new Firebase("https://cimply.firebaseio.com/"+corp+"/causes/corps_causes_index/");
+		causesindexRef.once('value', function(snap){
+			var total_causes = snap.numChildren();
+			var new_cause_number = total_causes+1;
+			causesindexRef.child(new_cause_number).set(slug);
 		})
-
 		
-
 		//set the global list of causes
-		var causeRef = new Firebase("https://cimply.firebaseio.com/Causes/"+slug);
-		console.info(corpRef);
+		var causeRef = new Firebase("https://cimply.firebaseio.com/causes/"+slug);
 		causeRef.update({
 			'URL':URL,
 			'name': display_name,
 			'description':description, 
-
 		}, onComplete)
 
-
-	}
 }
 
 
@@ -190,5 +163,10 @@ function unescapeEmail(email) {
 }
 
 function fb_san(input) {
-	return input.replace(/.|#|$|[|]/g, ""); //removes chars not accepted by Firebase locations.
+	var result = input.replace('.', ""); //removes chars not accepted by Firebase locations.
+	var result = result.replace('#', ""); //removes chars not accepted by Firebase locations.
+	var result = result.replace('$', ""); //removes chars not accepted by Firebase locations.
+	var result = result.replace('[', ""); //removes chars not accepted by Firebase locations.
+	var result = result.replace(']', ""); //removes chars not accepted by Firebase locations.
+	return result;
 }

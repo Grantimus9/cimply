@@ -7,7 +7,7 @@
 	
 	<!-- Load CSS first (faster) -->
 	<link rel="stylesheet" href="cimply_main.css">
-	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.3/jquery.mobile.min.css" />
+	<link href="/jquery-ui/jquery-ui.css" rel="stylesheet" type="text/css" />
 
 	<!-- Icons/CSS -->
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -50,19 +50,35 @@
 		<div class='view' id='main_screen' display='none'>
 			<div id="main_wrapper">
 				<div class="top_row">
-					<div class="left_cell" id="top_right_btn"><span class='fa fa-cog'></span></div>
+					<div class="left_cell" id="top_right_btn"><span class='fa fa-cog fa-2x'></span></div>
 					<div class="center_cell" id="top_zone"></div>
-					<div class="right_cell"  id="top_left_btn"><span class="fa fa-cog"></span></div>
+					<div class="right_cell"  id="top_left_btn"><span class="fa fa-cog fa-2x"></span></div>
 				</div>
 				<div class="middle_row">
-					<div class="left_cell"  id="no_zone">No</div>
-					<div class="center_cell"  id="cause_cell">CAUSE</div>
-					<div class="right_cell"  id="donate_zone">D</div>
+					<div class="left_cell"  id="no_zone"><span class="fa fa-remove fa-2x"></span></div>
+					<div class="center_cell"  id="cause_cell">
+						
+						<div class="cause_card">
+							<span class="cause_name" id="cause_name">Red Cross</span>
+							<div class="cause_photo">
+								<img src='/cause_photo_1.jpg'/>
+							</div>
+						</div>
+
+
+					</div>
+					<div class="right_cell"  id="donate_zone"><span class="fa fa-dollar fa-2x"></span></div>
 				</div>
 				<div class="bottom_row">
-					<div class="left_cell"  id="bottom_left_btn"><span class='fa fa-cog'></span></div>
-					<div class="center_cell"  id="bottom_zone"></div>
-					<div class="right_cell"  id="bottom_right_btn"><span class='fa fa-sign-out'></span></div>
+					<div class="left_cell"  id="bottom_left_btn"><span class='fa fa-cog fa-2x'></span></div>
+					<div class="center_cell">
+						
+						<span class="fa fa-2x fa-thumbs-o-down"></span>
+						<span id="bottom_zone"></span>
+						<span class="fa fa-2x fa-thumbs-o-up" style='margin-left:3%;'></span>
+					
+					</div>
+					<div class="right_cell"  id="bottom_right_btn"><span class='fa fa-sign-out fa-2x'></span></div>
 				</div>
 			</div>
 		</div>

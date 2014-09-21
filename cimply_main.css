@@ -23,6 +23,7 @@ body {
 	max-height:100%;
 	max-width:100%;
 	clear:both;
+	overflow:hidden;
 }
 
 /*Login Screen*/
@@ -81,38 +82,86 @@ body {
 	text-align: center;
 }
 
-#main_wrapper .top_row {
+.top_row {
 	height:5%;
 	clear:both; 
 }
 
-#main_wrapper .middle_row {
+.middle_row {
 	min-height:88%;
 	clear:both;
 }
 
-#main_wrapper .bottom_row {
+.bottom_row {
 	height:5%;
 	clear:both;
 }
 
-#main_wrapper .left_cell {
+.left_cell {
 	display:inline-block;
 	width:10%;
+	height:100%;
 	float:left;
 }
 
-#main_wrapper .right_cell {
+.right_cell {
 	display:inline-block;
 	width: 10%;
+	height:100%;
 	float:right;
 }
 
-#main_wrapper .center_cell {
+.center_cell {
 	display:inline-block;
-	width: 10%;
+	height:90%;
+	width: 80%;
 }
 
+#cause_cell {
+	height:90%;
+	width:80%;
+}
 
+/*these actual targets should be small and centered along each edge.*/
+#top_zone {
+	background-color:gray;
+	height:5%%;
+	width:20%%;
+	margin-left:30%;
+	margin-right:30%; 
+}
+
+#bottom_zone {
+	background-color:gray;
+	height:5%;
+	width:5%;
+}
+
+/*these actual targets should be small and centered along each edge.*/
+#donate_zone, #no_zone {
+	height:10%;
+	margin-top:85%;
+	width:10%%;
+}
+
+.cause_card {
+	margin-top:30%;
+	height:50%;
+	width:100%;
+	background-color: #e5e5e5;
+	border-radius:5px;
+	border: solid 2px white;
+}
+
+.cause_name {
+	font-size: 1.1em;
+	text-align: center;
+}
+
+.cause_card img {
+	height:80%;
+	width:90%;
+	border: solid 1px white;
+}
 
 
