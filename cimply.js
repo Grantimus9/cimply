@@ -109,7 +109,7 @@ function show_cause() {
 	var currentcauseRef = new Firebase('https://cimply.firebaseio.com/'+window.corp+'/user/'+window.user.id+'/cause_index_location');
 	currentcauseRef.once('value', function(snap){
 		var loc = snap.val();
-		var causenameref = new Firebase('https://cimply.firebaseio.com/'+window.corp+'/causes/corps_causes_index');
+		var causenameref = new Firebase('https://cimply.firebaseio.com/'+window.corp+'/causes/corps_causes_index/'+snap.val());
 		causenameref.once('value', function(namesnap){
 			console.info( namesnap.val() );
 			if (namesnap) {
