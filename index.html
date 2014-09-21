@@ -1,0 +1,79 @@
+<html>
+<head>
+	<title>Cimply</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="/cimply_favicon.png" type="image/x-icon">
+	<link rel="icon" href="/cimply_favicon.png" type="image/x-icon">
+	
+	<!-- Load CSS first (faster) -->
+	<link rel="stylesheet" href="cimply_main.css">
+	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.3/jquery.mobile.min.css" />
+
+	<!-- Icons/CSS -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+
+	<!-- Jquery Basic -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="/jquery-ui/jquery-ui.js"></script>
+
+	<!-- Jquery Mobile (these need to be minified past MVP) -->
+	<!--
+	<script src="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.3/jquery.mobile.min.js"></script>
+	 -->
+
+	 <!-- Touch Punch is a patch to Jquery draggable/droppable that makes it work with touch devices much better -->
+	 <script src="/jquery-ui/jquery.ui.touch-punch.min.js"></script>
+
+	<!-- Firebase for Login and Database  -->
+	<script src="https://cdn.firebase.com/js/client/1.0.21/firebase.js"></script>
+	<script src="https://cdn.firebase.com/js/simple-login/1.6.3/firebase-simple-login.js"></script>
+
+	<!-- Cimply JS -->
+	<script src='/cimply_helper.js'></script>
+	<script src='/cimply.js'></script>
+
+</head>
+<body>
+
+<div id="wrapper">
+	<div id="content">
+		<div class='view' id="login_screen" display='none'>
+			<img src='/cimply_logo_text.png'/><br/>
+			<input type="email" placeholder='Email' id='email'></input><br/>
+			<input type="password" placeholder='Password' id='password'></input><br/>
+			<button id='login_button'>Login</button><br/>
+			<button id='sign_up_button'>Sign Up</button><br/>
+		</div>
+		<div class='view' id='main_screen' display='none'>
+			<div id="main_wrapper">
+				<div class="top_row">
+					<div class="left_cell" id="top_right_btn"><span class='fa fa-cog'></span></div>
+					<div class="center_cell" id="top_zone"></div>
+					<div class="right_cell"  id="top_left_btn"><span class="fa fa-cog"></span></div>
+				</div>
+				<div class="middle_row">
+					<div class="left_cell"  id="no_zone">No</div>
+					<div class="center_cell"  id="cause_cell">CAUSE</div>
+					<div class="right_cell"  id="donate_zone">D</div>
+				</div>
+				<div class="bottom_row">
+					<div class="left_cell"  id="bottom_left_btn"><span class='fa fa-cog'></span></div>
+					<div class="center_cell"  id="bottom_zone"></div>
+					<div class="right_cell"  id="bottom_right_btn"><span class='fa fa-sign-out'></span></div>
+				</div>
+			</div>
+		</div>
+		<div class='view' id="cause_info_screen" display='none'>
+			Cause_Info Screen.
+		</div>
+	</div>
+</div>
+
+
+
+
+</body>
+</html>

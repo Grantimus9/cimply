@@ -1,0 +1,47 @@
+<html>
+<head>
+	<head>
+	<title>Cimply</title>
+	<link rel="shortcut icon" href="/cimply_favicon.png" type="image/x-icon">
+	<link rel="icon" href="/cimply_favicon.png" type="image/x-icon">
+	
+	<!-- Load CSS first (faster) -->
+	<link rel="stylesheet" href="cimply_main.css">
+	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.3/jquery.mobile.min.css" />
+
+	<!-- Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+
+	<!-- Jquery Basic -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="/jquery-ui/jquery-ui.js"></script>
+
+	<!-- Firebase for Login and Database  -->
+	<script src="https://cdn.firebase.com/js/client/1.0.21/firebase.js"></script>
+	<script src="https://cdn.firebase.com/js/simple-login/1.6.3/firebase-simple-login.js"></script>
+
+	<!-- Cimply JS -->
+	<script src='/cimply_helper.js'></script>
+	<script src='/cimply.js'></script>
+
+</head>
+</head>
+<body>
+	<style>
+	input {
+		width:50%;
+	}
+	</style>
+
+	Add a New Cause:<br/>
+	Skeleton for now. bare bones is generous. <br/>
+	<input type="text" id='corp' placeholder='Corporation'></input><br/>
+	<input type="text" id='name' placeholder='Cause Name. One Word For now'></input><br/>
+	<input type="text" id='URL' placeholder='The URL of where the organization"s photo can be found'></input><br/>
+	<input type="text" id='display_name' placeholder='Display Name (can be multiple words; what the user sees)'></input><br/>
+	<input type="text" id='description' height:300 placeholder='description of the cause'></input><br/>
+	<button id='add_new_cause_btn'>Add This Cause</button>
+	<div id="msg"></div>
+
+</body>
+</html>
