@@ -11,20 +11,27 @@ function show_screen(screen_name) {
    		// case: 'login'
        	show('login_screen');
        	$('#wrapper').css({
-       		'background-image': 'url(/2.png)',
+       		'background-image': 'url(/2.jpg)',
        		'background-repeat': 'no-repeat',
        		'background-size' : 'cover',
-       		'z-index' : 0, 
        	});
 
         break;
     case 'main':
     	show('main_screen');
-    	$('#wrapper').css('background-color', '#f1f1f1');
+    	$('#wrapper').css({
+       		'background-image': 'url(/2_in.png)',
+       		'background-repeat': 'no-repeat',
+       		'background-size' : 'cover',
+       	});
         break;
     case 'more_info':
     	show('more_info_screen');
-    	$('#wrapper').css('background-color', '#f1f1f1');
+    	$('#wrapper').css({
+       		'background-image': 'url(/2_in.png)',
+       		'background-repeat': 'no-repeat',
+       		'background-size' : 'cover',
+       	});
        
         break;
     default:
@@ -169,7 +176,7 @@ function render_cause_card(localcache, offset) {
 	$('#cause_cell').append(html);
 
 	//now make sure all of the draggable/droppable elements are initialized. 
-	$(".cause_card").draggable({ revert:true, revertDuration:0, stack:"div"});
+	$(".cause_card").draggable({ revert:true, revertDuration:0, stack:"div", scroll: false});
 		
 	$("#donate_zone").droppable({
 		drop: function(event, ui) {

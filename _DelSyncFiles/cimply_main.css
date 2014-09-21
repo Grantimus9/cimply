@@ -24,8 +24,18 @@ body {
 	max-height:100%;
 	max-width:100%;
 	clear:both;
-	overflow:scroll;
+	overflow-x:visible;
+	overflow-y:scroll;
 }
+
+#content {
+	margin:0;
+	border:0;
+	padding:0;
+	height:98%;
+	width:100%;
+}
+
 
 /*Login Screen*/
 
@@ -56,8 +66,12 @@ body {
 	font-size:1.1em;
 }
 
+#login_screen input[type=email] {
+	margin-top:60%;
+}
+
 #login_screen button {
-	background-color:#2CBB61;
+	background-color:transparent;
 	border-radius: 3px;
 	border: 1px solid #dbdbdb;
 	width:75%;
@@ -67,6 +81,7 @@ body {
 	text-align:center;
 	height:1.5em;
 	font-size:2em;
+	color:white;
 }
 
 #login_screen #login_button {
