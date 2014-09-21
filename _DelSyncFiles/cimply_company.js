@@ -30,10 +30,10 @@ $(document).ready(function(){
 		$('#engaged_employees').text(total);
 	})
 
-	var redcrossref = new Firebase('https://cimply.firebaseio.com/GS/causes/redcross/dollars');
-	var malarianomoreref = new Firebase('https://cimply.firebaseio.com/GS/causes/malarianomore/dollars');
-	var waterorgref = new Firebase('https://cimply.firebaseio.com/GS/causes/waterorg/dollars');
-	var wwfdollarsref = new Firebase('https://cimply.firebaseio.com/GS/causes/wwf/dollars');
+	var redcrossref = new Firebase('https://cimply.firebaseio.com/Lockheed/causes/redcross/dollars');
+	var malarianomoreref = new Firebase('https://cimply.firebaseio.com/Lockheed/causes/malarianomore/dollars');
+	var waterorgref = new Firebase('https://cimply.firebaseio.com/Lockheed/causes/waterorg/dollars');
+	var wwfdollarsref = new Firebase('https://cimply.firebaseio.com/Lockheed/causes/wwf/dollars');
 
 	redcrossref.on('value', function(snap) {
 		$('#redcrossdollars').text(snap.val());

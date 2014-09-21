@@ -50,14 +50,24 @@
 		<div class='view' id='main_screen' display='none'>
 			<div id="main_wrapper">
 				<div class="top_row">
-					<div class="left_cell" id="top_left_btn"><span class='fa fa-home fa-2x'></span></div>
+					<div class="left_cell" id="top_right_btn"><span class='fa fa-cog fa-2x'></span></div>
 					<div class="center_cell" id="top_zone"></div>
-					<div class="right_cell"  id="top_right_btn"><span class="fa fa-question fa-2x"></span></div>
+					<div class="right_cell"  id="top_left_btn"><span class="fa fa-cog fa-2x"></span></div>
 				</div>
 				<div class="middle_row">
-					<div class="left_cell"  id="no_zone"><span class="fa fa-remove fa-2x red_color"></span></div>
-					<div class="center_cell"  id="cause_cell"></div>
-					<div class="right_cell"  id="donate_zone"><span class="fa fa-dollar fa-2x green_color"></span></div>
+					<div class="left_cell"  id="no_zone"><span class="fa fa-remove fa-2x"></span></div>
+					<div class="center_cell"  id="cause_cell">
+						
+						<div class="cause_card">
+							<span class="cause_name" id="cause_name">Red Cross</span>
+							<div class="cause_photo">
+								<img src='/cause_photo_1.jpg'/>
+							</div>
+						</div>
+
+
+					</div>
+					<div class="right_cell"  id="donate_zone"><span class="fa fa-dollar fa-2x"></span></div>
 				</div>
 				<div class="bottom_row">
 					<div class="left_cell"  id="bottom_left_btn"><span class='fa fa-cog fa-2x'></span></div>
@@ -72,10 +82,8 @@
 				</div>
 			</div>
 		</div>
-		<div class='view' id="more_info_screen" display='none'>
-			<span id='display_name'></span><br/>
-			<span id='description'></span><br/>
-			<span class="fa fa-arrow-left fa-3x" onclick='swipe_mode()'></span>
+		<div class='view' id="cause_info_screen" display='none'>
+			Cause_Info Screen.
 		</div>
 	</div>
 </div>
