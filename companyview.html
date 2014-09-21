@@ -7,6 +7,7 @@
 	
 	<!-- Load CSS first (faster) -->
 	<link rel="stylesheet" href="cimply_main.css">
+	<link rel="stylesheet" href="company.css">
 	<link href="/jquery-ui/jquery-ui.css" rel="stylesheet" type="text/css" />
 
 	<!-- Icons/CSS -->
@@ -28,25 +29,77 @@
 
 </head>
 <body>
-<h1>Get Publicity</h1>
-Example Company: Goldman Sachs<br/>
-<br/>
-Red Cross Donations : <span id='redcrossdollars'></span><br/>
-Malaria No More Donations : <span id='malarianomoredollars'></span><br/>
-Water.org Donations : <span id='waterorgdollars'></span><br/>
-WWF Donations : <span id='wwfdollars'></span><br/>
-<br/>
-<br>
 
-Employees Engaged: <span id='engaged_employees'></span><br/><br/>
+	<div id="wrapper">
+		<h1>Get Publicity</h1>
+		<h2>Goldman Sachs</h2>
+		<h2>Employees Engaged: <span id='engaged_employees'></span></h2>
 
-Causes: <ul id='causes_list'>
-			
-		</ul>
-<br/>
-
-Activity: <ul id='activity'></ul>
-
+			<div class="bars" id="bars">
+				<div class="vertical">
+					<div class='number' id="redcrossdollars"></div>
+					<img src='/red_cross.png'/>
+					<div class='display_name'>Red Cross</div><br/>
+					<div class='social'>
+						<span class="fa fa-3x fa-facebook fa-fw" style='color: #3b5998; text-align:left;'>:<span id='fb_shares_redcross' class='black_color'></span>
+						</span>
+					</div>
+					<br/>
+					<div class='social'>
+						<span class="fa fa-3x fa-twitter fa-fw" style='color: #3cf; text-align:left;'>:<span id='tw_shares_redcross' class='black_color'></span>
+						</span>
+					</div>
+					<br/>
+				</div>
+				<div class="vertical">
+					<div class='number' id="malarianomoredollars"></div>
+					<img src='/malaria_img.png'/>
+					<div class='display_name'>Malaria No More</div><br/>
+					<div class='social'>
+						<span class="fa fa-3x fa-facebook fa-fw" style='color: #3b5998; text-align:left;'>:<span id='fb_shares_malarianomore' class='black_color'></span>
+						</span>
+					</div>
+					<br/>
+					<div class='social'>
+						<span class="fa fa-3x fa-twitter fa-fw" style='color: #3cf; text-align:left;'>:<span id='tw_shares_malarianomore' class='black_color'></span>
+						</span>
+					</div>
+					<br/>
+				</div>
+				<div class="vertical">
+					<div class='number' id="waterorgdollars"></div>
+					<img src='/water_img.jpeg'/>
+					<div class='display_name'>Water.Org</div><br/>
+					<div class='social'>
+						<span class="fa fa-3x fa-facebook fa-fw" style='color: #3b5998; text-align:left;'>:<span id='fb_shares_waterorg' class='black_color'></span>
+						</span>
+					</div>
+					<br/>
+					<div class='social'>
+						<span class="fa fa-3x fa-twitter fa-fw" style='color: #3cf; text-align:left;'>:<span id='tw_shares_waterorg' class='black_color'></span>
+						</span>
+					</div>
+					<br/>
+				</div>
+				<div class="vertical">
+					<div class='number' id="wwfdollars"></div>
+					<img src='/wwf.jpg'/>
+					<div class='display_name'>WWF</div><br/>
+					<div class='social'>
+						<span class="fa fa-3x fa-facebook fa-fw" style='color: #3b5998; text-align:left;'>:<span id='fb_shares_wwf' class='black_color'></span>
+						</span>
+					</div>
+					<br/>
+					<div class='social'>
+						<span class="fa fa-3x fa-twitter fa-fw" style='color: #3cf; text-align:left;'>:<span id='tw_shares_wwf' class='black_color'></span>
+						</span>
+					</div>
+					<br/>
+				</div>
+			</div>
+	
+	<div id="footer">cimply.firebaseapp.com</div>
+	</div>
 
 
 </body>

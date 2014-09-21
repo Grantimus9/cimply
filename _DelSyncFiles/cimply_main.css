@@ -13,6 +13,7 @@
 body {
 	font-family:'Oxygen', sans-serif;
 	font-size: 1em;
+	background-color: #f1f1f1;
 }
 
 #wrapper {
@@ -23,7 +24,7 @@ body {
 	max-height:100%;
 	max-width:100%;
 	clear:both;
-	overflow:hidden;
+	overflow:scroll;
 }
 
 /*Login Screen*/
@@ -40,7 +41,7 @@ body {
 	margin-left: 20%;
 	margin-right: 20%;
 	text-align:center;
-	margin-top:25%;
+	margin-top:15%;
 	margin-bottom:20%;
 }
 
@@ -52,6 +53,7 @@ body {
 	margin-right: 5%;
 	padding:1%;
 	margin-top:5%;
+	font-size:1.1em;
 }
 
 #login_screen button {
@@ -63,7 +65,7 @@ body {
 	margin-right: 12.5%;
 	margin-bottom:6%;
 	text-align:center;
-	height:2.1em;
+	height:1.5em;
 	font-size:2em;
 }
 
@@ -150,7 +152,7 @@ body {
 	width:100%;
 	background-color: #e5e5e5;
 	border-radius:5px;
-	border: solid 2px white;
+	border: solid 3px green;
 }
 
 .cause_name {
@@ -164,4 +166,19 @@ body {
 	border: solid 1px white;
 }
 
+/*Random UI things */
+.red_color {
+	color:red;
+}
 
+.green_color {
+	color:green;
+}
+
+.blue_color {
+	color:blue;
+}
+
+.black_color {
+	color:black;
+}

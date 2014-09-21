@@ -10,12 +10,21 @@ function show_screen(screen_name) {
     case 'login':
    		// case: 'login'
        	show('login_screen');
+       	$('#wrapper').css({
+       		'background-image': 'url(/2.png)',
+       		'background-repeat': 'no-repeat',
+       		'background-size' : 'cover',
+       		'z-index' : 0, 
+       	});
+
         break;
     case 'main':
     	show('main_screen');
+    	$('#wrapper').css('background-color', '#f1f1f1');
         break;
     case 'more_info':
     	show('more_info_screen');
+    	$('#wrapper').css('background-color', '#f1f1f1');
        
         break;
     default:
@@ -28,7 +37,6 @@ function createNewUser(email, password) {
 
 	window.auth.createUser(email, password, function(error, user) {
 	  if (error === null) {
-	    console.log("User created successfully:", user);
 		
 		//set the uid-corp index (denormalized data is weird) so we can look up the user's corporation later. 
 		// for now the corp is Lockheed
@@ -106,8 +114,8 @@ function check_local_cache_status() {
 	if (local === window.database) {
 		cache_complete()
 	} else {
-		console.log('caching..');
-		console.log('local: '+local+' remote: '+window.database+'.');
+		// console.log('caching..');
+		// console.log('local: '+local+' remote: '+window.database+'.');
 
 		setTimeout(function(){
 			check_local_cache_status();
@@ -125,7 +133,7 @@ function swipe_mode() {
 
 
 function cache_complete() {
-	console.log('local caching finished.');
+	// console.log('local caching finished.');
 	//create the card. 
 
 	//if window.offset exceeds the # of causes available, start loop over. 
@@ -150,7 +158,7 @@ function render_cause_card(localcache, offset) {
 	//to be accessible when shit gets dropped. 
 	window.current_cause = render_this;
 
-	console.info(render_this);
+	// console.info(render_this);
 	var html = ''
 	var html = html+'<div class="cause_card">';
 	var html = html+'<span class="cause_name">'+render_this.display_name+'</span>';
@@ -198,12 +206,12 @@ function render_cause_card(localcache, offset) {
 }
 
 function donate_action() {
-	tally();
+	tally(1);
 	check_local_cache_status();
 }
 
 function pass_action() {
-	tally();
+	tally(0);
 	check_local_cache_status();
 }
 
@@ -215,13 +223,16 @@ function more_info_action() {
 
 
 
-function tally() {
+function tally(status) {
 	//first tally
 	var slug = window.current_cause.slug; 
-	var updateRef = new Firebase("https://cimply.firebaseio.com/"+corp+"/causes/"+slug+'/dollars');
-	updateRef.transaction(function(current) {
-	  return current+1;
-	});
+
+	if (status == 1) {
+		var updateRef = new Firebase("https://cimply.firebaseio.com/"+corp+"/causes/"+slug+'/dollars');
+		updateRef.transaction(function(current) {
+		  return current+1;
+		});
+	}
 
 	//then update the window.offset 
 	window.offset++;

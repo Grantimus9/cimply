@@ -30,7 +30,7 @@ $(document).ready(function(){
 	    //Run main routine
 	    var mode = 'swipe';
 	    if (mode == 'swipe') {
-	    	show_cause();
+	    	cache();
 	    }
 		
 
@@ -68,67 +68,26 @@ $(document).ready(function(){
 }) //end of docready. 
 
 
-function show_cause() {
-	// This is the main routine, the backbone logic flow.
-
-	//first make sure all of the draggable/droppable elements are initialized. 
-	$(".cause_card").draggable({ revert:true, revertDuration:0, stack:"div"});
-	
-	$("#donate_zone").droppable({
-		drop: function(event, ui) {
-			// do something on dropped on this area
-			console.log('dropped on donate.')
-
-			},
-		tolerance: "touch"
-	});
-	$("#no_zone").droppable({
-		drop: function(event, ui) {
-			// do something on dropped on this area
-			console.log('dropped on no zone.')
-			
-			},
-		tolerance: "touch"
-	});
-	$("#top_zone").droppable({
-		drop: function(event, ui) {
-			// do something on dropped on this area
-			console.log('dropped on top zone.')
-			},
-		tolerance: "touch"
-	});
-	$("#bottom_zone").droppable({
-		drop: function(event, ui) {
-			// do something on dropped on this area
-			console.log('dropped on bottom zone.')
-			},
-		tolerance: "touch"
-	});
-
-
-	var currentcauseRef = new Firebase('https://cimply.firebaseio.com/'+window.corp+'/user/'+window.user.id+'/cause_index_location');
-	currentcauseRef.once('value', function(snap){
-		var loc = snap.val();
-		var causenameref = new Firebase('https://cimply.firebaseio.com/'+window.corp+'/causes/corps_causes_index/'+snap.val());
-		causenameref.once('value', function(namesnap){
-			console.info( namesnap.val() );
-			if (namesnap) {
-				var causename = namesnap.val();
-				console.log('on cause named: '+causename);
-
-				var causeref = new Firebase('https://cimply.firebaseio.com/causes/'+causename);
-				causeref.once('value', function(causerefsnap){
-					render_cause_card( causerefsnap.val() );
+function cache() {
+	//get each cause this company allows and cache it locally
+	window.allcauses = [];
+	var userRef = new Firebase("https://cimply.firebaseio.com/user_corp_index/"+window.user.id);
+	userRef.once('value', function(usersnap){
+		var corp = usersnap.val();
+		var causesRef = new Firebase("https://cimply.firebaseio.com/"+corp+"/causes");
+		causesRef.once('value', function(snap) {
+			snap.forEach(function(causesnap){
+				var cause = causesnap.name(); 
+				var causedataref = new Firebase("https://cimply.firebaseio.com/causes/"+cause);
+				causedataref.once('value', function(causedatasnap){
+					if (causedatasnap.val() !== null) {
+						window.allcauses.push(causedatasnap.val());
+					}
 				})
-			} else {
-				console.log('no name corresponding to that index.');
-			}
+			})
 		})
 	})
-
-
-
-
+	check_local_cache_status();
 }
 
 

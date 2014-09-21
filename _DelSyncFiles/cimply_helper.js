@@ -10,12 +10,19 @@ function show_screen(screen_name) {
     case 'login':
    		// case: 'login'
        	show('login_screen');
+       	$('#wrapper').css({
+       		'background-image': 'url(/2.png)',
+       		'background-repeat': 'no-repeat',
+       		'background-size' : 'cover',
+       		'z-index' : 0, 
+       	});
+
         break;
     case 'main':
     	show('main_screen');
         break;
-    case 'cause_info_screen':
-    	show('cause_info_screen');
+    case 'more_info':
+    	show('more_info_screen');
        
         break;
     default:
@@ -90,10 +97,152 @@ function removeUser(email, password) {
 // 
 // 
 
-function render_cause_card(snap) {
-	console.log('snap to be rendered');
-	console.info( snap );
+function check_local_cache_status() {
+	// makes sure all's cached. Does a super basic check - whether there are the same #. See DeepEqual type stuff for more serious array checking. 
+	var userRef = new Firebase("https://cimply.firebaseio.com/user_corp_index/"+window.user.id);
+	userRef.once('value', function(usersnap){
+		var corp = usersnap.val();
+		var causesRef = new Firebase("https://cimply.firebaseio.com/"+corp+"/causes");
+		causesRef.once('value', function(snap) {
+			window.database = snap.numChildren();
+		})
+	})
+
+	var local = window.allcauses.length;
+
+	if (local === window.database) {
+		cache_complete()
+	} else {
+		console.log('caching..');
+		console.log('local: '+local+' remote: '+window.database+'.');
+
+		setTimeout(function(){
+			check_local_cache_status();
+		}, 500);
+
+
+	}
 }
+
+
+function swipe_mode() {
+	show_screen('main');
+	check_local_cache_status();
+}
+
+
+function cache_complete() {
+	console.log('local caching finished.');
+	//create the card. 
+
+	//if window.offset exceeds the # of causes available, start loop over. 
+	if (!window.offset) {
+		window.offset = 0;
+	}
+
+	//0 index vs. positive integers 
+	if (window.offset  >= window.allcauses.length) {
+		console.log('reached end, resetting window.offset');
+		window.offset = 0;
+	}
+
+	render_cause_card(window.allcauses, window.offset | 0);
+}
+
+function render_cause_card(localcache, offset) {
+	$('#cause_cell').empty();
+
+	var render_this = localcache[offset];
+	
+	//to be accessible when shit gets dropped. 
+	window.current_cause = render_this;
+
+	console.info(render_this);
+	var html = ''
+	var html = html+'<div class="cause_card">';
+	var html = html+'<span class="cause_name">'+render_this.display_name+'</span>';
+		var html = html+'<div class="cause_photo">';
+		var html = html+'<img src="'+render_this.URL+'"/>';
+		var html = html+'</div>';
+	var html = html+'</div>';
+	$('#cause_cell').append(html);
+
+	//now make sure all of the draggable/droppable elements are initialized. 
+	$(".cause_card").draggable({ revert:true, revertDuration:0, stack:"div"});
+		
+	$("#donate_zone").droppable({
+		drop: function(event, ui) {
+			// do something on dropped on this area
+			console.log('dropped on donate.')
+			donate_action();
+			},
+		tolerance: "touch"
+	});
+	$("#no_zone").droppable({
+		drop: function(event, ui) {
+			// do something on dropped on this area
+			console.log('dropped on pass zone.')
+			pass_action();
+			},
+		tolerance: "touch"
+	});
+	$("#top_zone").droppable({
+		drop: function(event, ui) {
+			// do something on dropped on this area
+			console.log('dropped on top zone.')
+			more_info_action();
+			},
+		tolerance: "touch"
+	});
+	$("#bottom_zone").droppable({
+		drop: function(event, ui) {
+			// do something on dropped on this area
+			console.log('dropped on bottom zone.')
+
+			},
+		tolerance: "touch"
+	});
+}
+
+function donate_action() {
+	tally(1);
+	check_local_cache_status();
+}
+
+function pass_action() {
+	tally(0);
+	check_local_cache_status();
+}
+
+function more_info_action() {
+	show_screen('more_info');
+	$('#description').html(window.current_cause.description);
+	$('#display_name').html(window.current_cause.display_name);
+}
+
+
+
+function tally(status) {
+	//first tally
+	var slug = window.current_cause.slug; 
+
+	if (status == 1) {
+		var updateRef = new Firebase("https://cimply.firebaseio.com/"+corp+"/causes/"+slug+'/dollars');
+		updateRef.transaction(function(current) {
+		  return current+1;
+		});
+	}
+
+	//then update the window.offset 
+	window.offset++;
+
+	//update total number of causes this user has seen so far (not this doesn't keep count of WHICH ones, just total #)
+	var userseenref =  new Firebase("https://cimply.firebaseio.com/"+corp+"/user/"+window.user.id+"/charities_seen");
+	userseenref.transaction(function(current) {
+	  return current+1;
+	});
+}
+
 
 
 function add_new_cause() {
@@ -123,7 +272,7 @@ function add_new_cause() {
 		};
 
 		//update the corporations corpindex (translates numbers to corp slugs) 
-		var causesindexRef = new Firebase("https://cimply.firebaseio.com/"+corp+"/causes/corps_causes_index/");
+		var causesindexRef = new Firebase("https://cimply.firebaseio.com/"+corp+"/corps_causes_index/");
 		causesindexRef.once('value', function(snap){
 			var total_causes = snap.numChildren();
 			var new_cause_number = total_causes+1;
@@ -134,8 +283,9 @@ function add_new_cause() {
 		var causeRef = new Firebase("https://cimply.firebaseio.com/causes/"+slug);
 		causeRef.update({
 			'URL':URL,
-			'name': display_name,
-			'description':description, 
+			'display_name': display_name,
+			'description':description,
+			'slug':slug, 
 		}, onComplete)
 
 }
@@ -147,6 +297,9 @@ function hide(div_id) {
 
 function hideclass(classname) {
 	$('.'+classname).css('display', 'none');
+	$('#wrapper').css({
+   		'background-color' : '#f1f1f1',
+   	});
 }
 
 function show (div_id) {

@@ -1,0 +1,71 @@
+<html>
+<head>
+	<title>Cimply</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="/cimply_favicon.png" type="image/x-icon">
+	<link rel="icon" href="/cimply_favicon.png" type="image/x-icon">
+	
+	<!-- Load CSS first (faster) -->
+	<link rel="stylesheet" href="cimply_main.css">
+	<link rel="stylesheet" href="company.css">
+	<link href="/jquery-ui/jquery-ui.css" rel="stylesheet" type="text/css" />
+
+	<!-- Icons/CSS -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+
+	<!-- Jquery Basic -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+	<!-- Firebase for Login and Database  -->
+	<script src="https://cdn.firebase.com/js/client/1.0.21/firebase.js"></script>
+	<script src="https://cdn.firebase.com/js/simple-login/1.6.3/firebase-simple-login.js"></script>
+
+	<!-- Cimply JS -->
+	<script src='/cimply_helper.js'></script>
+	<script src='/cimply_company.js'></script>
+
+</head>
+<body>
+
+	<div id="wrapper">
+		<h1>Get Publicity</h1>
+		<h2>Goldman Sachs</h2>
+		<h2>Employees Engaged: <span id='engaged_employees'></span></h2>
+
+			<br/>
+			<div class="bars" id="bars">
+				<div class="vertical">
+					<div class='number' id="redcrossdollars"></div>
+					<img src='/red_cross.png'/>
+					<div class='display_name'>Red Cross</div>
+					<div class="fa fa-3x fa-facebook fa-fw" style='color: ;'>&nbsp;:
+						<span id='fb_shares_redcross' class='black_color'>3</span>
+					</div>
+					<div class="fa fa-3x fa-twitter fa-fw" style='color: ;'>&nbsp;:
+						<span id='tw_shares_redcross' clasee='black_color'>6</span>
+					</div>
+				</div>
+				<div class="vertical">
+					<div class='number' id="malarianomoredollars"></div>
+					<img src='/malaria_img.png'/>	
+					<span class='display_name'>Malaria No More</span>
+				</div>
+				<div class="vertical">
+					<div class='number' id="waterorgdollars"></div>
+					<img src='/water_img.jpeg'/>
+					<span class='display_name'>Water.Org</span>
+				</div>
+				<div class="vertical">
+					<div class='number' id="wwfdollars"></div>
+					<img src='/wwf.jpg'/>
+					<span class='display_name'>WWF</span>
+				</div>
+			</div>
+	</div>
+
+
+</body>
+</html>

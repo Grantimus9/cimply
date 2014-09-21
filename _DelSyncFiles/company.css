@@ -1,0 +1,52 @@
+/*Company View CSS*/
+
+
+#wrapper {
+	margin:0;
+	padding:0;
+	height:100%;
+	width:100%;
+	max-height:100%;
+	max-width:100%;
+	clear:both;
+	overflow:hidden;
+}
+
+h1 {
+	text-align:center;
+}
+
+h2 {
+	text-align:center;
+}
+
+
+#wrapper img {
+	height:100px;
+	width:100px;
+}
+
+#bars {
+	width:100%;
+	height:100%;
+}
+
+.vertical {
+	display:inline-block;
+	width:23%;
+	height:50%;
+	text-align:center;
+}
+
+.display_name {
+	font-size:2em;
+}
+
+.vertical div {
+	display:block;
+}
+
+.number {
+	font-size:4em;
+}
+
