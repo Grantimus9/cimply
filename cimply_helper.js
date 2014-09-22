@@ -24,6 +24,9 @@ function show_screen(screen_name) {
        		'background-repeat': 'no-repeat',
        		'background-size' : 'cover',
        	});
+       	
+       	$('#bottom_right_btn').css('cursor','pointer');
+
         break;
     case 'more_info':
     	show('more_info_screen');
@@ -127,8 +130,6 @@ function check_local_cache_status() {
 		setTimeout(function(){
 			check_local_cache_status();
 		}, 500);
-
-
 	}
 }
 

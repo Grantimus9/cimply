@@ -176,7 +176,7 @@ function render_cause_card(localcache, offset) {
 	$('#cause_cell').append(html);
 
 	//now make sure all of the draggable/droppable elements are initialized. 
-	$(".cause_card").draggable({ revert:true, revertDuration:0, stack:"div"});
+	$(".cause_card").draggable({ revert:true, revertDuration:0, stack:"div", scroll: false});
 		
 	$("#donate_zone").droppable({
 		drop: function(event, ui) {
